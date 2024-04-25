@@ -40,7 +40,7 @@ namespace RebarPresentation
                     Rebar r = doc.GetElement(id) as Rebar;
                     if (r != null)
                     {
-                        Debug.WriteLine("Current rebar id: " + id.IntegerValue.ToString());
+                        Debug.WriteLine($"Current rebar id: {id}");
                         bool check = r.CanApplyPresentationMode(v);
                         if (!check)
                         {
@@ -69,7 +69,7 @@ namespace RebarPresentation
                     RebarInSystem ris = doc.GetElement(id) as RebarInSystem;
                     if (ris != null)
                     {
-                        Debug.WriteLine("Current RebarInSystem id: " + id.IntegerValue.ToString());
+                        Debug.WriteLine($"Current RebarInSystem id: {id}");
                         bool check = ris.CanApplyPresentationMode(v);
                         if (!check)
                         {
