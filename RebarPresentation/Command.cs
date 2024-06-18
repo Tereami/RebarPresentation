@@ -40,40 +40,40 @@ namespace RebarPresentation
                     Rebar r = doc.GetElement(id) as Rebar;
                     if (r != null)
                     {
-                        Trace.WriteLine($"Current rebar id: {id}");
+                        Debug.WriteLine($"Current rebar id: {id}");
                         bool check = r.CanApplyPresentationMode(v);
                         if (!check)
                         {
-                            Trace.WriteLine("Cant apply presentation mode");
+                            Debug.WriteLine("Cant apply presentation mode");
                             continue;
                         }
 
                         r.SetPresentationMode(v, RebarPresentationMode.Select);
                         int count = r.NumberOfBarPositions;
                         int middle = count / 2;
-                        Trace.WriteLine("Bars count: " + count + ", middle bar: " + middle);
+                        Debug.WriteLine("Bars count: " + count + ", middle bar: " + middle);
                         for (int i = 0; i < count; i++)
                         {
                             if (i == 0 || i == (count - 1) || i == middle)
                             {
                                 r.SetBarHiddenStatus(v, i, false);
-                                Trace.WriteLine("Bar " + i + ", set visible");
+                                Debug.WriteLine("Bar " + i + ", set visible");
                             }
                             else
                             {
                                 r.SetBarHiddenStatus(v, i, true);
-                                Trace.WriteLine("Bar " + i + ", set invisible");
+                                Debug.WriteLine("Bar " + i + ", set invisible");
                             }
                         }
                     }
                     RebarInSystem ris = doc.GetElement(id) as RebarInSystem;
                     if (ris != null)
                     {
-                        Trace.WriteLine($"Current RebarInSystem id: {id}");
+                        Debug.WriteLine($"Current RebarInSystem id: {id}");
                         bool check = ris.CanApplyPresentationMode(v);
                         if (!check)
                         {
-                            Trace.WriteLine("Cant apply presentation mode");
+                            Debug.WriteLine("Cant apply presentation mode");
                             continue;
                         }
                         ris.SetPresentationMode(v, RebarPresentationMode.Select);
@@ -84,19 +84,19 @@ namespace RebarPresentation
                             if (i == 0 || i == (count - 1) || i == middle)
                             {
                                 ris.SetBarHiddenStatus(v, i, false);
-                                Trace.WriteLine("Bar " + i + ", set visible");
+                                Debug.WriteLine("Bar " + i + ", set visible");
                             }
                             else
                             {
                                 ris.SetBarHiddenStatus(v, i, true);
-                                Trace.WriteLine("Bar " + i + ", set invisible");
+                                Debug.WriteLine("Bar " + i + ", set invisible");
                             }
                         }
                     }
                 }
                 t.Commit();
             }
-            Trace.WriteLine("All done");
+            Debug.WriteLine("All done");
             return Result.Succeeded;
         }
     }
