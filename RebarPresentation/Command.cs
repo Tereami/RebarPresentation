@@ -26,8 +26,8 @@ namespace RebarPresentation
     {
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
-            Debug.Listeners.Clear();
-            Debug.Listeners.Add(new RbsLogger.Logger("RebarPresentation"));
+            Trace.Listeners.Clear();
+            Trace.Listeners.Add(new RbsLogger.Logger("RebarPresentation"));
             Document doc = commandData.Application.ActiveUIDocument.Document;
             View v = doc.ActiveView;
             Selection sel = commandData.Application.ActiveUIDocument.Selection;
@@ -40,40 +40,40 @@ namespace RebarPresentation
                     Rebar r = doc.GetElement(id) as Rebar;
                     if (r != null)
                     {
-                        Debug.WriteLine($"Current rebar id: {id}");
+                        Trace.WriteLine($"Current rebar id: {id}");
                         bool check = r.CanApplyPresentationMode(v);
                         if (!check)
                         {
-                            Debug.WriteLine("Cant apply presentation mode");
+                            Trace.WriteLine("Cant apply presentation mode");
                             continue;
                         }
 
                         r.SetPresentationMode(v, RebarPresentationMode.Select);
                         int count = r.NumberOfBarPositions;
                         int middle = count / 2;
-                        Debug.WriteLine("Bars count: " + count + ", middle bar: " + middle);
+                        Trace.WriteLine("Bars count: " + count + ", middle bar: " + middle);
                         for (int i = 0; i < count; i++)
                         {
                             if (i == 0 || i == (count - 1) || i == middle)
                             {
                                 r.SetBarHiddenStatus(v, i, false);
-                                Debug.WriteLine("Bar " + i + ", set visible");
+                                Trace.WriteLine("Bar " + i + ", set visible");
                             }
                             else
                             {
                                 r.SetBarHiddenStatus(v, i, true);
-                                Debug.WriteLine("Bar " + i + ", set invisible");
+                                Trace.WriteLine("Bar " + i + ", set invisible");
                             }
                         }
                     }
                     RebarInSystem ris = doc.GetElement(id) as RebarInSystem;
                     if (ris != null)
                     {
-                        Debug.WriteLine($"Current RebarInSystem id: {id}");
+                        Trace.WriteLine($"Current RebarInSystem id: {id}");
                         bool check = ris.CanApplyPresentationMode(v);
                         if (!check)
                         {
-                            Debug.WriteLine("Cant apply presentation mode");
+                            Trace.WriteLine("Cant apply presentation mode");
                             continue;
                         }
                         ris.SetPresentationMode(v, RebarPresentationMode.Select);
@@ -84,19 +84,19 @@ namespace RebarPresentation
                             if (i == 0 || i == (count - 1) || i == middle)
                             {
                                 ris.SetBarHiddenStatus(v, i, false);
-                                Debug.WriteLine("Bar " + i + ", set visible");
+                                Trace.WriteLine("Bar " + i + ", set visible");
                             }
                             else
                             {
                                 ris.SetBarHiddenStatus(v, i, true);
-                                Debug.WriteLine("Bar " + i + ", set invisible");
+                                Trace.WriteLine("Bar " + i + ", set invisible");
                             }
                         }
                     }
                 }
                 t.Commit();
             }
-            Debug.WriteLine("All done");
+            Trace.WriteLine("All done");
             return Result.Succeeded;
         }
     }
